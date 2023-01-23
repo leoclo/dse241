@@ -1,2 +1,2 @@
-# dse241
-Data visualization Project
+docker-compose up -d
+

@@ -1,0 +1,13 @@
+version: '3'
+services:
+  vue:
+    image: vueapp
+    restart: always
+    build:
+      context: .
+      dockerfile: ./frontend.Dockerfile-dev
+    container_name: "vue-ui"
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./vue-app/src:/vue-app/src
