@@ -11,3 +11,14 @@ services:
       - "5173:5173"
     volumes:
       - ./vue-app/src:/vue-app/src
+  flask:
+    image: flaskapp
+    restart: always
+    build:
+      context: .
+      dockerfile: ./backend.Dockerfile-dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./flask:/flask
+

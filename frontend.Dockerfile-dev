@@ -1,6 +1,5 @@
 FROM node:14.18.2
 
-RUN mkdir vue-app
 WORKDIR vue-app
 
 COPY ./vue-app/ .

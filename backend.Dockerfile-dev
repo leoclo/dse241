@@ -1,0 +1,15 @@
+FROM python:3.9
+
+WORKDIR flask
+
+COPY ./flask/ .
+
+RUN rm -rf venv/
+
+RUN python3 -m venv venv
+
+RUN bash venv/bin/activate
+
+RUN pip install -r requirements.txt
+
+CMD ["python", "api.py"]
