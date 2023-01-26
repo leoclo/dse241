@@ -1,22 +1,47 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-
-</script>
-
 <template>
-  
   <header>
-    <h1> Mahalo</h1>
     <div class="wrapper">
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink class="app-link" :class="{active: $route.path=='/'}"  :to="{name: 'home'}">  
+          Home        
+        </RouterLink>
+        <RouterLink class="app-link" :class="{active: $route.path.includes('/olympics')}" :to="{name: 'olympics'}">
+          Olympics
+        </RouterLink>
       </nav>
     </div>
   </header>
-
-  <RouterView />
+  <div>
+    <RouterView />
+  </div>
+  
 </template>
 
-<style>
+<script setup>
+  import { RouterLink, RouterView } from 'vue-router';
+</script>
+
+
+<style lang="scss">
+  .wrapper {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .app-link {
+    color: $secondary;
+    border: 2px solid $light_border_color;
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+  }
+
+  .app-link:focus, .app-link:hover, .app-link.active{
+      color: $primary;
+      border-color: rgba($primary, .4)
+  }
+
 </style>

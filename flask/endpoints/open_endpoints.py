@@ -7,5 +7,4 @@ from src.settings import settings as ST
 @app.route("/health")
 @endpoint_handler
 def hello_world():
-    
     return {ST.HTTP_STATUS: 200, ST.PAYLOAD: {ST.MSG: 'Aloha', ST.SUCCESS: True}}
