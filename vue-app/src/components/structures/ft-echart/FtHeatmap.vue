@@ -27,8 +27,8 @@
     },
     methods: {
       getEchartsOption(){
-        let option = {...echartBaseOption};
-        let xColName = 'Year';
+        let option = {baseOption: { ...echartBaseOption}, options: []};
+        let xColName = 'Sport';
         let yColName = 'Country';
         let valColName = 'Medal';
 

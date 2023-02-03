@@ -1,46 +1,71 @@
 export const dfToEchart = (df, xColName, yColName, valColName) => {
     let xAxisLabels = [];
     let yAxisLabels = [];
-    let seriesData = [];
     let min = null;
     let max = null;
+    let options = []
+    let timelineYears = [];
 
-    df.forEach(row => {
-        let labelX = row[xColName];
-        let labelY = row[yColName];
-        if(!labelX || !labelY){
-            return;
-        }
-        let indexX = xAxisLabels.indexOf(labelX);
-        if(indexX < 0){
-            xAxisLabels.push(row[xColName]);
-            indexX = xAxisLabels.indexOf(labelX);
-        }
-        let indexY = yAxisLabels.indexOf(labelY);
-        if(indexY < 0){
-            yAxisLabels.push(row[yColName]);
-            indexY = yAxisLabels.indexOf(labelY);
-        }
-        let val = row[valColName];
-        if(val){
-            if (min == null){ min = val};
-            if (val < min){ min = val };
-            if (max == null){ max = val};
-            if (val > max){ max = val }
-        }
-        seriesData.push({value: [indexX, indexY, val], row: row});
-    });
+    Object.keys(df).forEach(year => {
+        let seriesData = [];
+        let city = '';
+        timelineYears.push(year)
+        df[year].forEach(row => {
+            city = row.City
+            let labelX = row[xColName];
+            let labelY = row[yColName];
+            if(!labelX || !labelY){
+                return;
+            }
+            let indexX = xAxisLabels.indexOf(labelX);
+            if(indexX < 0){
+                xAxisLabels.push(row[xColName]);
+                indexX = xAxisLabels.indexOf(labelX);
+            }
+            let indexY = yAxisLabels.indexOf(labelY);
+            if(indexY < 0){
+                yAxisLabels.push(row[yColName]);
+                indexY = yAxisLabels.indexOf(labelY);
+            }
+            let val = row[valColName];
+            if(val){
+                if (min == null){ min = val};
+                if (val < min){ min = val };
+                if (max == null){ max = val};
+                if (val > max){ max = val }
+            }
+            seriesData.push({value: [indexX, indexY, val], row: row});
+        });
+        options.push({
+            'title': {
+                text: `Total Amount of Medals Heatmap - Winter Olympics ${city} ${year}`,
+                left: 'center'
+            },
+            'series': {
+                name: `Winter Olympics ${city} ${year}`,
+                data: seriesData
+            }
+        })
+    })
+
 
     return {
-        'visualMap.min': min,
-        'visualMap.max': max,
-        'series[0].data': seriesData,
-        'yAxis.data': yAxisLabels,
-        'xAxis.data': xAxisLabels
+        'baseOption.visualMap.min': min,
+        'baseOption.visualMap.max': max,
+        'baseOption.yAxis.data': yAxisLabels,
+        'baseOption.xAxis.data': xAxisLabels,
+        'baseOption.timeline.data': timelineYears,
+        'options': options 
     }
 }
 
 export const echartBaseOption = {
+    "timeline": {
+        "axisType": "category",
+        "autoPlay": true,
+        "playInterval": 1000,
+        "calculable": true,
+    },
     "tooltip": {
         "show": true,
         "position": "top",
@@ -51,7 +76,8 @@ export const echartBaseOption = {
             const toolHtml = `
                 <div>
                     <b>Olympics ${row.City} ${row.Year}</b></br>
-                    <p>${params.marker} ${row.Country}: ${row.Medal} Medals<p>
+                    <span>Sport: ${row.Sport}</span></br>
+                    <span>${params.marker} ${row.Country}: ${row.Medal} Medals<span>
                 </div>
             `;
             return toolHtml
@@ -114,12 +140,6 @@ export const echartBaseOption = {
     },
     "dataZoom": [
         {
-          "type": 'slider',
-          "xAxisIndex": 0,
-          "filterMode": "none",
-          "bottom": 20
-        },
-        {
           "type": "slider",
           "yAxisIndex": 0,
           "filterMode": "none",
@@ -128,9 +148,7 @@ export const echartBaseOption = {
     ],
     "series": [
         {
-            "name": "olympics",
             "type": "heatmap",
-            "coordinateSystem": "cartesian2d",
             "itemStyle": {
                 "borderColor": "rgba(255, 255, 255, 1)",
                 "borderWidth": 2
