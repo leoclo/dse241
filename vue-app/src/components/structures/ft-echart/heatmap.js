@@ -38,7 +38,7 @@ export const dfToEchart = (df, xColName, yColName, valColName) => {
         });
         options.push({
             'title': {
-                text: `Total Amount of Medals Heatmap - Winter Olympics ${city} ${year}`,
+                text: `Top 10 Medalist Countries Heatmap - Winter Olympics ${city} ${year}`,
                 left: 'center'
             },
             'series': {
@@ -84,7 +84,7 @@ export const echartBaseOption = {
         }
     },
     "title":{
-        "text": "Total Amount of Medals Heatmap - Winter Olympics",
+        "text": "Top 10 Medalist Countries Heatmap - Winter Olympics",
         "left": "center",
     },
     "toolbox":{

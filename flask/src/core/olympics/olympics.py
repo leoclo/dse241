@@ -7,13 +7,17 @@ def get_df_v1():
 
     df_heatmap = pd.pivot_table(df, values=['Medal'], index=['Year', 'Country', 'City'], aggfunc=len).reset_index()
 
-
     df_heatmap = df_heatmap.sort_values(by=['Year', 'Medal'], ascending=False)
     
     return {'df_heatmap': df_heatmap.to_dict(orient='records')}
 
 def get_df():
     df = pd.read_csv('src/core/olympics/olympics.csv')
+    # filter out countrie with less than 10 medals
+    df_total = pd.pivot_table(df, values=['Medal'], index=['Country'], aggfunc=len).reset_index()
+    countries = df_total.nlargest(10, 'Medal')['Country'].unique()
+    df = df[df['Country'].isin(countries)]
+
     df_heatmap = pd.pivot_table(df, values=['Medal'], index=['Year', 'Country', 'Sport', 'City'], aggfunc=len).reset_index()
     df_years = {}
     for year in df['Year'].unique():
