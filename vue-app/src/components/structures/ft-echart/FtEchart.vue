@@ -5,33 +5,23 @@
 <script>
   import * as echarts from 'echarts';
   import { FtTheme } from './theme';
+  var myChart = {};
 
   export default {
     name: 'ft-echart',
-    props: {chartOption: {}},
-    data(){
-      return {
-          myChart: {},
-      }
-    },
-    mounted() {
+    props: {echartOption: {required:true}},
+    created() {
       echarts.registerTheme('ft-theme', FtTheme);
-      this.myChart = echarts.init(this.$refs.my_echart, 'ft-theme');
-      this.myChart.setOption({
-        xAxis: {
-          type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-          type: 'value'
-        },
-        series: [
-          {
-            data: [150, 230, 224, 218, 135, 147, 260],
-            type: 'line'
-          }
-        ]
-      });
+    },
+    mounted(){
+      this.initialize()
+    },  
+    methods: {
+      initialize(){
+        myChart = echarts.init(this.$refs.my_echart, 'ft-theme');
+        console.log(this.echartOption)
+        myChart.setOption(this.echartOption);
+      }
     }
   }
 
