@@ -63,7 +63,7 @@ On the ./vue-app folder install npm packages with
 npm install
 ```
 
-Once it's finished 
+Once it's finished start the application with the following command
 
 ```bash
 npm run dev
