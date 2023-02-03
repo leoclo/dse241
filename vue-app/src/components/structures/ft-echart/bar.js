@@ -23,15 +23,22 @@ export const dfToEchart = (data, xColName, valColName) => {
         })
         options.push({
             'title': {
-                text: `Top 10 Medalist Countries - Winter Olympics ${city} ${year}`,
+                text: `Top 10 Medalist Countries Progression Over Time`,
+                subtext: `Winter Olympics Medals From 1924 - ${year}`,
                 left: 'center'
             },
             'series': series
         })
     })
+    const colorMap = {
+        'Gold': '#d4af37',
+        'Silver': '#c0c0c0',
+        'Bronze': '#cd7f32'
+    }
     let baseSeries = data.series.map(serie =>{
         return {
-            "type": "bar"
+            "type": "bar",
+            "itemStyle": {"color": colorMap[serie]}
         };
     })
 
@@ -45,9 +52,8 @@ export const dfToEchart = (data, xColName, valColName) => {
 
 export const echartBaseOption = {
     "timeline": {
-        "axisType": "category",
+        "axisType": "time",
         "autoPlay": true,
-        "playInterval": 1000,
         "calculable": true,
     },
     "tooltip": {
@@ -59,17 +65,12 @@ export const echartBaseOption = {
             console.log({params})
             const toolHtml = `
                 <div>
-                    <b>Olympics ${row.City} ${row.Year}</b></br>
-                    <span>Sport: ${row.Sport}</span></br>
-                    <span>${params.marker} ${row.Country}: ${row.Medal} Medals<span>
+                    <b>Olympics ${row.Year}</b></br>
+                    <span>${params.marker} ${row.Country}: ${row.Sport} ${row.Medal} Medals<span>
                 </div>
             `;
             return toolHtml
         }
-    },
-    "title":{
-        "text": "Top 10 Medalist Countries Heatmap - Winter Olympics",
-        "left": "center",
     },
     "toolbox":{
         "show": true,
@@ -77,7 +78,7 @@ export const echartBaseOption = {
             "saveAsImage": {
                 "type": "png"
             },
-            "magicType": { "type": ['line', 'bar', 'stack'] },
+            "magicType": { "type": ['stack'] },
         }
     },
     "yAxis": {
@@ -100,7 +101,7 @@ export const echartBaseOption = {
             "show": false
         },
         "axisLabel": {
-            "fontSize": "13",
+            "fontSize": "12",
             "fontWeight": "bold"
         }
     },
@@ -112,17 +113,9 @@ export const echartBaseOption = {
         "orient": "vertical"
     },
     "grid": {
-        "left": 220,
+        "left": 60,
         "top": 60,
         "bottom": 90,
-        "right": "7%"
-    },
-    "dataZoom": [
-        {
-          "type": "slider",
-          "yAxisIndex": 0,
-          "filterMode": "none",
-          "left": 18
-        }
-    ]
+        "right": 150
+    }
 }
