@@ -17,7 +17,8 @@ def get_df():
     seriesCol = 'Medal'
     valCol = 'Sport'
     df_total = pd.pivot_table(df, values=[valCol], index=['Country'], aggfunc=len).reset_index()
-
+    print(df_total)
+    
     countries = df_total.nlargest(10, valCol)['Country'].unique()
     series = list(df[seriesCol].unique())
 
@@ -32,7 +33,6 @@ def get_df():
     
     df = df[df['Country'].isin(countries)]
     
-    # df = pd.pivot_table(df, values=[valCol], index=['Year', 'Country', seriesCol, 'City'], aggfunc=len).reset_index()
     df_years = {}
     cum_years = []
     for year in loop_years:
@@ -51,7 +51,6 @@ def get_df():
             df_serie = df_year[df_year[seriesCol] == serie]
             if df_serie.shape[0]:
                 df_years[str(year)][serie] = df_serie.to_dict(orient='records')
-
             else:
                 df_years[str(year)][serie] = []
 

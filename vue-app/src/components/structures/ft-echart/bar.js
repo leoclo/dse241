@@ -37,6 +37,7 @@ export const dfToEchart = (data, xColName, valColName) => {
     }
     let baseSeries = data.series.map(serie =>{
         return {
+            "stack": 'total',
             "type": "bar",
             "itemStyle": {"color": colorMap[serie]}
         };
