@@ -438,44 +438,36 @@ export const FtTheme = {
     },
     "timeline": {
         "lineStyle": {
-            "color": "#008acd",
-            "width": 1
+            "color": "#DAE1F5",
+            "width": 2
         },
         "itemStyle": {
-            "normal": {
-                "color": "#008acd",
-                "borderWidth": 1
-            },
-            "emphasis": {
-                "color": "#a9334c"
-            }
+            "color": "#A4B1D7",
+            "borderWidth": 1
         },
         "controlStyle": {
-            "normal": {
-                "color": "#008acd",
-                "borderColor": "#008acd",
-                "borderWidth": 0.5
-            },
-            "emphasis": {
-                "color": "#008acd",
-                "borderColor": "#008acd",
-                "borderWidth": 0.5
-            }
+            "color": "#A4B1D7",
+            "borderColor": "#A4B1D7",
+            "borderWidth": 1
         },
         "checkpointStyle": {
-            "color": "#2ec7c9",
-            "borderColor": "rgba(46,199,201,0.4)"
+            "color": "#316bf3",
+            "borderColor": "fff"
         },
         "label": {
-            "normal": {
-                "textStyle": {
-                    "color": "#008acd"
-                }
+            "color": "#A4B1D7"
+        },
+        "emphasis": {
+            "itemStyle": {
+                "color": "#FFF"
             },
-            "emphasis": {
-                "textStyle": {
-                    "color": "#008acd"
-                }
+            "controlStyle": {
+                "color": "#A4B1D7",
+                "borderColor": "#A4B1D7",
+                "borderWidth": 1
+            },
+            "label": {
+                "color": "#A4B1D7"
             }
         }
     },
