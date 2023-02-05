@@ -17,7 +17,6 @@ def get_df():
     seriesCol = 'Medal'
     valCol = 'Sport'
     df_total = pd.pivot_table(df, values=[valCol], index=['Country'], aggfunc=len).reset_index()
-    print(df_total)
     
     countries = df_total.nlargest(10, valCol)['Country'].unique()
     series = list(df[seriesCol].unique())
@@ -32,7 +31,11 @@ def get_df():
         series = ['Gold', 'Silver', 'Bronze']
     
     df = df[df['Country'].isin(countries)]
-    
+    df_heatmap = pd.pivot_table(df, values=['Medal'], index=['Year', 'Country', 'City'], aggfunc=len).reset_index()
+    df_heatmap.Country = df_heatmap.Country.astype("category")
+    df_heatmap.Country = df_heatmap.Country.cat.set_categories(countries)
+    df_heatmap = df_heatmap.sort_values(['Country'])
+
     df_years = {}
     cum_years = []
     for year in loop_years:
@@ -54,4 +57,4 @@ def get_df():
             else:
                 df_years[str(year)][serie] = []
 
-    return {'bar': {'df': df_years, 'countries': countries, 'series': series }, 'df_heatmap': {} }
+    return {'bar': {'df': df_years, 'countries': countries, 'series': series }, 'heatmap': {'df': df_heatmap} }

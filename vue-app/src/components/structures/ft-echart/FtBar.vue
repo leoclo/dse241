@@ -37,7 +37,7 @@
         Object.keys(echartDataRef).forEach(k => {
           _.set(option, k, echartDataRef[k]);
         })
-        console.log('bar_option', option);
+
         return option;
       }
     }

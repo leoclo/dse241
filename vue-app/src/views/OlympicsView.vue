@@ -4,7 +4,7 @@
     <div v-if="!res.success" class="olympics-div"> Server Response: {{JSON.stringify(res)}}</div>
     <div class="ft-heatmap-chart" v-if="res.success">
       <ft-bar :data="bar"></ft-bar>
-      <!-- <ft-heatmap :df="heatmap"></ft-heatmap> -->
+      <ft-heatmap :df="heatmap"></ft-heatmap>
       
     </div>
   </ft-container>
