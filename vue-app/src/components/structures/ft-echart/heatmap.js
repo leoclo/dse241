@@ -1,90 +1,66 @@
-export const dfToEchart = (df, xColName, yColName, valColName) => {
+export const dfToEchart = (df, xColName, yColName, valColName, yLables) => {
     let xAxisLabels = [];
     let yAxisLabels = [];
+    if(yLables){
+        yAxisLabels = [...yLables]
+    }
+    let seriesData = [];
     let min = null;
     let max = null;
-    let options = []
-    let timelineYears = [];
 
-    Object.keys(df).forEach(year => {
-        let seriesData = [];
-        let city = '';
-        timelineYears.push(year)
-        df[year].forEach(row => {
-            city = row.City
-            let labelX = row[xColName];
-            let labelY = row[yColName];
-            if(!labelX || !labelY){
-                return;
-            }
-            let indexX = xAxisLabels.indexOf(labelX);
-            if(indexX < 0){
-                xAxisLabels.push(row[xColName]);
-                indexX = xAxisLabels.indexOf(labelX);
-            }
-            let indexY = yAxisLabels.indexOf(labelY);
-            if(indexY < 0){
-                yAxisLabels.push(row[yColName]);
-                indexY = yAxisLabels.indexOf(labelY);
-            }
-            let val = row[valColName];
-            if(val){
-                if (min == null){ min = val};
-                if (val < min){ min = val };
-                if (max == null){ max = val};
-                if (val > max){ max = val }
-            }
-            seriesData.push({value: [indexX, indexY, val], row: row});
-        });
-        options.push({
-            'title': {
-                text: `Top 10 Medalist Countries Heatmap - Winter Olympics ${city} ${year}`,
-                left: 'center'
-            },
-            'series': {
-                name: `Winter Olympics ${city} ${year}`,
-                data: seriesData
-            }
-        })
-    })
-
+    df.forEach(row => {
+        let labelX = row[xColName];
+        let labelY = row[yColName];
+        if(!labelX || !labelY){
+            return;
+        }
+        let indexX = xAxisLabels.indexOf(labelX);
+        if(indexX < 0){
+            xAxisLabels.push(row[xColName]);
+            indexX = xAxisLabels.indexOf(labelX);
+        }
+        let indexY = yAxisLabels.indexOf(labelY);
+        if(indexY < 0){
+            yAxisLabels.push(row[yColName]);
+            indexY = yAxisLabels.indexOf(labelY);
+        }
+        let val = row[valColName];
+        if(val){
+            if (min == null){ min = val};
+            if (val < min){ min = val };
+            if (max == null){ max = val};
+            if (val > max){ max = val }
+        }
+        seriesData.push({value: [indexX, indexY, val], row: row});
+    });
 
     return {
-        'baseOption.visualMap.min': min,
-        'baseOption.visualMap.max': max,
-        'baseOption.yAxis.data': yAxisLabels,
-        'baseOption.xAxis.data': xAxisLabels,
-        'baseOption.timeline.data': timelineYears,
-        'options': options 
+        'visualMap.min': min,
+        'visualMap.max': max,
+        'series[0].data': seriesData,
+        'yAxis.data': yAxisLabels,
+        'xAxis.data': xAxisLabels
     }
 }
 
 export const echartBaseOption = {
-    "timeline": {
-        "axisType": "category",
-        "autoPlay": true,
-        "playInterval": 1000,
-        "calculable": true,
-    },
     "tooltip": {
         "show": true,
         "position": "top",
         "renderMode": "html",
         formatter: (params) => {
             let row = params.data.row;
-            console.log({params})
             const toolHtml = `
                 <div>
                     <b>Olympics ${row.City} ${row.Year}</b></br>
-                    <span>Sport: ${row.Sport}</span></br>
-                    <span>${params.marker} ${row.Country}: ${row.Medal} Medals<span>
+                    <p>${params.marker} ${row.Country}: ${row.Medal} Medals<p>
                 </div>
             `;
             return toolHtml
         }
     },
     "title":{
-        "text": "Top 10 Medalist Countries Heatmap - Winter Olympics",
+        "text": "Total Amount of Medals Heatmap - Winter Olympics",
         "left": "center",
     },
     "toolbox":{
@@ -140,6 +116,12 @@ export const echartBaseOption = {
     },
     "dataZoom": [
         {
+          "type": 'slider',
+          "xAxisIndex": 0,
+          "filterMode": "none",
+          "bottom": 20
+        },
+        {
           "type": "slider",
           "yAxisIndex": 0,
           "filterMode": "none",
@@ -148,7 +130,9 @@ export const echartBaseOption = {
     ],
     "series": [
         {
+            "name": "olympics",
             "type": "heatmap",
+            "coordinateSystem": "cartesian2d",
             "itemStyle": {
                 "borderColor": "rgba(255, 255, 255, 1)",
                 "borderWidth": 2

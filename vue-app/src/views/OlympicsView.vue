@@ -3,8 +3,8 @@
     <template #title><label> Olympics Visualization</label></template>
     <div v-if="!res.success" class="olympics-div"> Server Response: {{JSON.stringify(res)}}</div>
     <div class="ft-heatmap-chart" v-if="res.success">
-      <ft-bar :data="bar"></ft-bar>
-      <!-- <ft-heatmap :df="heatmap"></ft-heatmap> -->
+      <span><ft-bar :data="bar"></ft-bar></span>
+      <span><ft-heatmap :data="heatmap"></ft-heatmap></span>
       
     </div>
   </ft-container>
@@ -31,7 +31,7 @@
     },
     created(){
       this.axios.get('/olympics').then(data => {
-        this.heatmap = data.data.df_heatmap;
+        this.heatmap = data.data.heatmap;
         this.bar = data.data.bar;
         this.res = {'success': true, heatmapShape: this.heatmap.length};
       }).catch(error => {
@@ -47,6 +47,11 @@
   }
   .ft-heatmap-chart {
     width: 100%;
+  }
+
+  .ft-heatmap-chart span {
+    display: block;
+    padding-top: 2rem;
   }
 
 </style>
