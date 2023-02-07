@@ -6,8 +6,13 @@ export const dfToEchart = (data, xColName, valColName) => {
     let options = []
     let timelineYears = [];
     let df = data.df;
-    const defaultSeriesData = data.countries.map(country=> null);
-    Object.keys(df).forEach(year => {
+    const defaultSeriesData = data.all_countries.map(country=> null);
+    let firstXaxis = [];
+
+    Object.keys(df).forEach((year, i) => {
+        if(i === 0){
+            firstXaxis = Object.values(df[year].countries);
+        }
         timelineYears.push(year)
         let series = [];
         let city = '';
@@ -17,17 +22,32 @@ export const dfToEchart = (data, xColName, valColName) => {
                 city = row.City
                 let country = row[xColName]
                 let val = row[valColName];
-                seriesData[data.countries.indexOf(country)] = {value: val, row: row};
+                seriesData[df[year].countries.indexOf(country)] = {value: val, row: row};
             });
             series.push({data: seriesData, name: s });
         })
+
         options.push({
             'title': {
                 text: `Top 10 Medalist Countries Progression Over Time`,
                 subtext: `Winter Olympics Medals From 1924 - ${year}`,
                 left: 'center'
             },
-            'series': series
+            'series': series,
+            'xAxis': {
+                'data': Object.values(df[year].countries),
+                "axisLine": {
+                    "show": false
+                },
+                "name": "Country",
+                "axisTick": {
+                    "show": false
+                },
+                "axisLabel": {
+                    "fontSize": "12",
+                    "fontWeight": "bold"
+                }
+            }
         })
     })
     const colorMap = {
@@ -44,7 +64,7 @@ export const dfToEchart = (data, xColName, valColName) => {
     })
 
     return {
-        'baseOption.xAxis.data': xAxisLabels,
+        'baseOption.xAxis.data': firstXaxis,
         'baseOption.timeline.data': timelineYears,
         'baseOption.series': baseSeries,
         'options': options 
@@ -56,6 +76,7 @@ export const echartBaseOption = {
         "axisType": "time",
         "autoPlay": true,
         "calculable": true,
+        "replaceMerge": "xAxis"
     },
     "tooltip": {
         "show": true,
@@ -63,7 +84,6 @@ export const echartBaseOption = {
         "renderMode": "html",
         formatter: (params) => {
             let row = params.data.row;
-            console.log({params})
             const toolHtml = `
                 <div>
                     <b>Olympics ${row.Year}</b></br>
@@ -93,18 +113,7 @@ export const echartBaseOption = {
         // }
     },
     "xAxis": {
-        "data": [],
-        "axisLine": {
-            "show": false
-        },
-        "name": "Country",
-        "axisTick": {
-            "show": false
-        },
-        "axisLabel": {
-            "fontSize": "12",
-            "fontWeight": "bold"
-        }
+
     },
     "legend": {
         "top": "middle",

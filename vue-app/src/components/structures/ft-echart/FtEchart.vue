@@ -19,7 +19,6 @@
     methods: {
       initialize(){
         myChart = echarts.init(this.$refs.my_echart, 'ft-theme');
-        console.log(this.echartOption)
         myChart.setOption(this.echartOption);
       }
     }
