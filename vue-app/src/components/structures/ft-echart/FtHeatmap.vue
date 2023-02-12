@@ -8,6 +8,7 @@
 import FtEchart from './FtEchart.vue';
 import { echartBaseOption, dfToEchart} from './heatmap.js'
 import _ from 'lodash';
+
 export default {
   name: 'ft-heatmap',
   components:{

@@ -8,6 +8,9 @@
         <RouterLink class="app-link" :class="{active: $route.path.includes('/olympics')}" :to="{name: 'olympics'}">
           Olympics
         </RouterLink>
+        <RouterLink class="app-link" :class="{active: $route.path.includes('/co2')}" :to="{name: 'co2'}">
+          CO<sub>2</sub>
+        </RouterLink>
       </nav>
     </div>
   </header>
@@ -19,10 +22,11 @@
 
 <script>
   import { RouterLink, RouterView } from 'vue-router';
+  
   export default {
     name: 'App',
     created(){
-      this.axios.defaults.baseURL = 'http://localhost:5000';
+      this.axios.defaults.baseURL = 'http://localhost:5001';
     }
   }
 </script>

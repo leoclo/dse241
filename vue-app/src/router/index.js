@@ -16,6 +16,14 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/OlympicsView.vue')
+    },
+    {
+      path: '/co2',
+      name: 'co2',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/Co2View.vue')
     }
   ]
 })
