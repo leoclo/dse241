@@ -18,7 +18,7 @@ services:
       context: .
       dockerfile: ./backend.Dockerfile-dev
     ports:
-      - "5000:5000"
+      - "5001:5001"
     volumes:
       - ./flask:/flask
 

@@ -1,8 +1,8 @@
 <template>
   <ft-container>
     <template #title><label> Olympics Visualization</label></template>
-    <div v-if="!res.success" class="olympics-div"> Server Response: {{JSON.stringify(res)}}</div>
-    <div class="ft-heatmap-chart" v-if="res.success">
+    <div v-if="!res.success" class="resp-div"> Server Response: {{JSON.stringify(res)}}</div>
+    <div class="ft-chart" v-if="res.success">
       <span><ft-bar :data="bar"></ft-bar></span>
       <span><ft-heatmap :data="heatmap"></ft-heatmap></span>
       
@@ -42,14 +42,14 @@
 </script>
 
 <style lang="scss">
-  .olympics-div {
+  .resp-div {
     color: $primary;
   }
-  .ft-heatmap-chart {
+  .ft-chart {
     width: 100%;
   }
 
-  .ft-heatmap-chart span {
+  .ft-chart span {
     display: block;
     padding-top: 2rem;
   }

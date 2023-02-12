@@ -5,13 +5,22 @@
 <script>
   import * as echarts from 'echarts';
   import { FtTheme } from './theme';
+  import _ from 'lodash';
   var myChart = {};
 
   export default {
     name: 'ft-echart',
-    props: {echartOption: {required:true}},
+    props: {echartOption: {required:true}, geojsonMapRef: {default: ()=> []}},
     created() {
+      
       echarts.registerTheme('ft-theme', FtTheme);
+
+      Object.keys(this.geojsonMapRef).forEach(k => {
+        echarts.registerMap(
+          k, this.geojsonMapRef[k].geojson,
+          _.get(this.geojsonMapRef[k], 'extra', {}) 
+        );
+      });
     },
     mounted(){
       this.initialize()
