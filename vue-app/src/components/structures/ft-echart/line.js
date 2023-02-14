@@ -34,7 +34,8 @@ export const dfToEchart = (data) => {
 
 export const echartBaseOption = {
     "title":{
-        "left": "center"
+        "left": "center",
+        "subtext": "Measured in Million Metric Tons of CO2"
     },
     "tooltip": {
         "trigger": "axis",
