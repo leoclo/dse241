@@ -22,11 +22,12 @@
 
 <script>
   import { RouterLink, RouterView } from 'vue-router';
-  
+
   export default {
     name: 'App',
     created(){
       this.axios.defaults.baseURL = 'http://localhost:5001';
+      // this.axios.defaults.headers.get['Content-Type'] = 'application/json';
     }
   }
 </script>

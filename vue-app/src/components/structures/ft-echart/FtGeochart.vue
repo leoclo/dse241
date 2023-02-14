@@ -1,6 +1,6 @@
 <template>
     <div class="geochart-wrapper">
-        <ft-echart :key="echartKey" :echartOption="echartOption" :geojsonMapRef="geojsonMapRef"></ft-echart>
+        <ft-echart @init="(myChart) => $emit('init', myChart)" :key="echartKey" :echartOption="echartOption" :geojsonMapRef="geojsonMapRef"></ft-echart>
     </div>
 </template>
 
@@ -57,7 +57,6 @@
                 Object.keys(echartDataRef).forEach(k => {
                     _.set(option, k, echartDataRef[k]);
                 })
-                console.log(option)
                 return option;
             }
         }

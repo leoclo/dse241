@@ -48,12 +48,13 @@ export const echartBaseOption = {
         "show": true,
         "position": "top",
         "renderMode": "html",
+        "appendToBody": true,
         formatter: (params) => {
             let row = params.data.row;
             const toolHtml = `
                 <div>
-                    <b>Olympics ${row.City} ${row.Year}</b></br>
-                    <p>${params.marker} ${row.Country}: ${row.Medal} Medals<p>
+                    <span><b>Olympics ${row.City} ${row.Year}</b></span></br>
+                    <span>${params.marker} ${row.Country}: ${row.Medal} Medals</span>
                 </div>
             `;
             return toolHtml

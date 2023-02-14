@@ -24,18 +24,27 @@ export const dfToEchart = (df, valColName, locColName) => {
 export const echartBaseOption = {
     "title":{
         "text": "US States Carbon Emissions 1990-2010",
+        "subtext": "Click on title or state to see progression through time",
+        "textStyle": {
+            "fontSize": 19
+        },
+        "subtextStyle": {
+            "fontSize": 14
+        },
         "left": "center",
+        "triggerEvent": true
     },
     "tooltip": {
         "show": true,
         "position": "top",
         "renderMode": "html",
+        "appendToBody": true,
         formatter: (params) => {
             let row = params.data.row;
             const v = new Intl.NumberFormat('en-US', {maximumFractionDigits: 0, roundingIncrement: 100} ).format(row.Value)
             const toolHtml = `
                 <div>
-                    <span><b>State:</b> ${row.State}</span></br>
+                    <span> ${params.marker} <b>State:</b> ${row.State}</span></br>
                     <span><b>Emission: </b> ${v} Million Metric Tons CO<sub>2</sub><span>
                 </div>
             `;
@@ -69,5 +78,13 @@ export const echartBaseOption = {
                 }
             }
         }
-    ]
+    ],
+    "toolbox":{
+        "show": true,
+        "feature": {
+            "saveAsImage": {
+                "type": "png"
+            }
+        }
+    },
 }

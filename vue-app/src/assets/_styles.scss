@@ -1,8 +1,45 @@
-// flexbox
+@import "variables.scss";
+
 label {
     font-size: 16px;
     color: #696969;
     margin: 0px;
+}
+
+.ft-bg-white {
+background-color: #fff !important;
+}
+
+.ft-text {
+    color: $primary !important;
+}
+.ft-hover-text {
+    cursor:pointer !important;
+}
+.ft-hover-text:hover {
+    color: $primary !important;
+}
+
+.ft-text-secondary {
+    color: $secondary !important;
+}
+
+.ft-close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 0.5;
+}
+.ft-close:hover {
+    color: #000;
+    text-decoration: none;
+}
+.ft-close:not(:disabled):not(.disabled):focus,
+.ft-close:not(:disabled):not(.disabled):hover {
+    opacity: 0.75;
 }
 
 .ft-d-flex {
