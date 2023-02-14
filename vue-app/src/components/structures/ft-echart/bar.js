@@ -82,11 +82,12 @@ export const echartBaseOption = {
         "show": true,
         "position": "top",
         "renderMode": "html",
+        "appendToBody": true, 
         formatter: (params) => {
             let row = params.data.row;
             const toolHtml = `
                 <div>
-                    <b>Olympics ${row.Year}</b></br>
+                    <span><b>Olympics ${row.Year}</b></span><br>
                     <span>${params.marker} ${row.Country}: ${row.Sport} ${row.Medal} Medals<span>
                 </div>
             `;
@@ -112,9 +113,7 @@ export const echartBaseOption = {
         //     "fontWeight": "bold"
         // }
     },
-    "xAxis": {
-
-    },
+    "xAxis": {},
     "legend": {
         "top": "middle",
         "right": "3%",

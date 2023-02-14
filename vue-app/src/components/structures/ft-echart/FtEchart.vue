@@ -12,7 +12,6 @@
     name: 'ft-echart',
     props: {echartOption: {required:true}, geojsonMapRef: {default: ()=> []}},
     created() {
-      
       echarts.registerTheme('ft-theme', FtTheme);
 
       Object.keys(this.geojsonMapRef).forEach(k => {
@@ -29,6 +28,7 @@
       initialize(){
         myChart = echarts.init(this.$refs.my_echart, 'ft-theme');
         myChart.setOption(this.echartOption);
+        this.$emit('init', myChart);
       }
     }
   }
