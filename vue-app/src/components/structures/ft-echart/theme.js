@@ -165,46 +165,6 @@ export const FtTheme = {
             }
         }
     },
-    "graph": {
-        "itemStyle": {
-            "normal": {
-                "borderWidth": 0,
-                "borderColor": "#ccc"
-            }
-        },
-        "lineStyle": {
-            "normal": {
-                "width": 1,
-                "color": "#aaaaaa"
-            }
-        },
-        "symbolSize": 3,
-        "symbol": "emptyCircle",
-        "smooth": false,
-        "color": [
-            "#17223b",
-            "#448ef6",
-            "#fdb44b",
-            "#80ac7b",
-            "#6b778d",
-            "#d04925",
-            "#e5cf0d",
-            "#7c4789",
-            "#ff008b",
-            "#9fd3c7",
-            "#07a2a4",
-            "#9a7fd1",
-            "#6f5553",
-            "#c9ab00"
-        ],
-        "label": {
-            "normal": {
-                "textStyle": {
-                    "color": "#eeeeee"
-                }
-            }
-        }
-    },
     "map": {
         "itemStyle": {
             "normal": {

@@ -68,6 +68,7 @@ export const echartBaseOption = {
             "map": 'us-states',
             "name": "USA",
             "type": "map",
+            "selectedMode": false,
             "itemStyle": {
                 "borderColor": "rgba(255, 255, 255, 1)",
                 "borderWidth": 2

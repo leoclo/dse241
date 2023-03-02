@@ -5,6 +5,7 @@ from utils.api_utils.api_utils import endpoint_handler
 from src.settings import settings as ST
 from src.core.olympics import olympics
 from src.core.co2 import co2
+from src.core.sheep import sheep
 
 
 @app.route("/health")
@@ -31,4 +32,11 @@ def co2_get():
 @endpoint_handler
 def co2_get_spec():
     res = co2.get_df_spec(request.args.get('spec'))
+    return {ST.HTTP_STATUS: 200, ST.PAYLOAD: res}
+
+
+@app.route("/sheep")
+@endpoint_handler
+def sheep_get():
+    res = sheep.get_df()
     return {ST.HTTP_STATUS: 200, ST.PAYLOAD: res}
