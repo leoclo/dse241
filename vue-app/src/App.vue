@@ -11,6 +11,9 @@
         <RouterLink class="app-link" :class="{active: $route.path.includes('/co2')}" :to="{name: 'co2'}">
           CO<sub>2</sub>
         </RouterLink>
+        <RouterLink class="app-link" :class="{active: $route.path.includes('/sheep')}" :to="{name: 'sheep'}">
+          Sheep
+        </RouterLink>
       </nav>
     </div>
   </header>
