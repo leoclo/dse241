@@ -26,7 +26,6 @@
       },
       created(){
         this.axios.get('/sheep').then(data => {
-          console.log(data)
           this.graph = data.data.graph;
           this.res = {'success': true };
         }).catch(error => {
