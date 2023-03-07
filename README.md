@@ -76,3 +76,7 @@ When everything is running:
 
 Navigate to http://localhost:5173/olympics in your browser to see the visualization created for the Olympic Games Asssignment
 
+Navigate to http://localhost:5173/co2 in your browser to see the visualization created for the Carbon Emissions Assignment
+
+Navigate to http://localhost:5173/sheep in your browser to see the visualization created for the Sheep Visualization assignment
+
