@@ -6,6 +6,8 @@ from src.settings import settings as ST
 from src.core.olympics import olympics
 from src.core.co2 import co2
 from src.core.sheep import sheep
+from src.core.virus import virus
+from src.core.piles import piles
 
 
 @app.route("/health")
@@ -39,4 +41,18 @@ def co2_get_spec():
 @endpoint_handler
 def sheep_get():
     res = sheep.get_df()
+    return {ST.HTTP_STATUS: 200, ST.PAYLOAD: res}
+
+
+@app.route("/virus")
+@endpoint_handler
+def virus_get():
+    res = virus.get_df()
+    return {ST.HTTP_STATUS: 200, ST.PAYLOAD: res}
+
+
+@app.route("/piles")
+@endpoint_handler
+def piles_get():
+    res = piles.get_df()
     return {ST.HTTP_STATUS: 200, ST.PAYLOAD: res}

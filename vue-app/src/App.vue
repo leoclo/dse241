@@ -14,6 +14,12 @@
         <RouterLink class="app-link" :class="{active: $route.path.includes('/sheep')}" :to="{name: 'sheep'}">
           Sheep
         </RouterLink>
+        <RouterLink class="app-link" :class="{active: $route.path.includes('/virus')}" :to="{name: 'virus'}">
+          Virus
+        </RouterLink>
+        <RouterLink class="app-link" :class="{active: $route.path.includes('/piles')}" :to="{name: 'piles'}">
+          Piles (Final Project)
+        </RouterLink>
       </nav>
     </div>
   </header>

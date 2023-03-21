@@ -1,0 +1,6 @@
+Copy code
+# Ignore everything
+*
+
+# Except for .gitignore
+!.gitignore

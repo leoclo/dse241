@@ -1,0 +1,20 @@
+downladed from:
+https://maps.princeton.edu/catalog
+
+# for lat long place identification:
+brazil_admin1.json
+https://maps.princeton.edu/catalog/stanford-pb606mt4669
+
+brazil_admin2.json
+https://maps.princeton.edu/catalog/stanford-bs788qq4876
+
+
+Key Properties:
+name_0 - country (Brazil)
+name_1 - state  (Minas Gerais)
+name_2 - Belo Horizonte
+
+# For better map efficiency
+natural_earth_state_provinces_light.geojson
+https://maps.princeton.edu/catalog/stanford-gn522sy3319
+
