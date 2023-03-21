@@ -80,5 +80,5 @@ Navigate to http://localhost:5173/co2 in your browser to see the visualization c
 
 Navigate to http://localhost:5173/sheep in your browser to see the visualization created for the Sheep Visualization assignment
 
-Navigate to http://localhost:5173/virus in your browser to see the visualization created for the Sheep Visualization assignment
+Navigate to http://localhost:5173/virus in your browser to see the visualization created for the Virus Visualization assignment
 
