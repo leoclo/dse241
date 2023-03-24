@@ -3,21 +3,20 @@
       <template #title><label> Piles Visualization</label></template>
       <div v-if="!res.success" class="resp-div"> Server Response: {{JSON.stringify(res)}}</div>
       <div class="ft-chart" v-if="res.success">
-        ALOHA
-        <span></span>
+        <span><ft-gmap-echart :data="custom"></ft-gmap-echart></span>
       </div>
     </ft-container>
   </template>
-  
+
   <script>
     import FtContainer from '@/components/utils/ft-container/FtContainer.vue';
-    import FtGraph from '@/components/structures/ft-echart/FtGraph.vue';
+    import FtGmapEchart from '@/components/structures/ft-echart/FtGmapEchart.vue';
 
     export default {
       name: 'piles-view',
       components: {
         FtContainer,
-        FtGraph
+        FtGmapEchart
       },
       data(){
         return {
@@ -40,7 +39,7 @@
       }
     };
   </script>
-  
+
   <style lang="scss">
     .resp-div {
       color: $primary;
@@ -48,10 +47,10 @@
     .ft-chart {
       width: 100%;
     }
-  
+
     .ft-chart span {
       display: block;
-      padding-top: 2rem;
+      padding-top: 0.5rem;
     }
-  
+
   </style>
