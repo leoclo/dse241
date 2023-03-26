@@ -29,7 +29,7 @@
       },
       methods:{
         get_piles(){
-          this.axios.get('/piles').then(data => {
+          this.axios.get('/piles',  {params: {'admin1': null}}).then(data => {
           this.custom = data.data.custom;
           this.res = {'success': true };
           }).catch(error => {

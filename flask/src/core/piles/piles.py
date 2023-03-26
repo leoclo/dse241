@@ -12,21 +12,32 @@ from turfpy.transformation import circle as turf_circle
 
 
 
-
 # --- ENDPOINT CALLS ---
 
 
-def get_df():
+def get_df(spec):
     base_path = 'src/core/piles'
-    level = 'admin1'
-
     df = pd.read_csv(f'{base_path}/data/piles_with_places.csv')
-    df = df.pivot_table(index=[level], values=['volume_cubic_meters'], aggfunc=sum).reset_index()
 
-    with open(f'{base_path}/geojsons/brazil_admin1_clean_light.json', 'r') as json_file:
+    admin1 = spec.get('admin1')
+    geojson_path = 'geojsons/brazil_admin1_clean_light.json'
+    level = ['admin1']
+    if admin1 is not None:
+        level = ['admin1', 'admin2']
+        df = df[df['admin1'] == admin1]
+        geojson_path = f'geojsons/admin2_clean/{admin1}/{admin1}_light.json'
+
+
+    df = df.pivot_table(
+        index=level,
+        values=['volume_cubic_meters', 'center_area_lat', 'center_area_long'],
+        aggfunc={'volume_cubic_meters': 'sum', 'center_area_lat': 'mean', 'center_area_long': 'mean'}
+    ).reset_index()
+
+    with open(f'{base_path}/{geojson_path}', 'r') as json_file:
         data_order = []
         chart_features = []
-        series_data = df[level].unique().tolist()
+        series_data = df[level[-1]].unique().tolist()
 
         for feature in json.load(json_file)['features']:
             if feature['properties']['name'] in series_data:
@@ -39,9 +50,35 @@ def get_df():
                 'chart_features': chart_features,
                 'data_order': data_order,
                 'val_col': 'volume_cubic_meters',
-                'level_col': level
+                'level_col': level[-1]
             }
         }
+
+def get_work_df(spec):
+    base_path = 'src/core/piles'
+    df = pd.read_csv(f'{base_path}/data/piles_with_places.csv')
+
+    level = 'area_name'
+    admin1 = spec.get('admin1')
+    admin2 = spec.get('admin2')
+
+    df = df[df['admin1'] == admin1]
+    df = df[df['admin2'] == admin2]
+
+    df = df.pivot_table(
+        index='area_name',
+        values=['volume_cubic_meters', 'center_area_lat', 'center_area_long'],
+        aggfunc={'volume_cubic_meters': 'sum', 'center_area_lat': 'mean', 'center_area_long': 'mean'}
+    ).reset_index()
+
+    return {
+        'scatter': {
+            'df': df.to_dict(orient='records'),
+            'val_col': 'volume_cubic_meters',
+            'level_col': level
+        }
+    }
+
 
 
 # --- GEOJSON UTILS ---
