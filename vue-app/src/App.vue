@@ -31,12 +31,13 @@
 
 <script>
   import { RouterLink, RouterView } from 'vue-router';
+  
 
   export default {
     name: 'App',
     created(){
       this.axios.defaults.baseURL = 'http://localhost:5001';
-      // this.axios.defaults.headers.get['Content-Type'] = 'application/json';
+      window.GOOGLE_API_KEY = 'AIzaSyDJW4jsPlNKgv6jFm3B5Edp5ywgdqLWdmc';
     }
   }
 </script>

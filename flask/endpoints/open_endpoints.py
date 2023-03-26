@@ -54,5 +54,12 @@ def virus_get():
 @app.route("/piles")
 @endpoint_handler
 def piles_get():
-    res = piles.get_df()
+    res = piles.get_df(request.args)
+    return {ST.HTTP_STATUS: 200, ST.PAYLOAD: res}
+
+
+@app.route("/piles-area")
+@endpoint_handler
+def piles_work_get():
+    res = piles.get_work_df(request.args)
     return {ST.HTTP_STATUS: 200, ST.PAYLOAD: res}

@@ -66,7 +66,9 @@ export const echartBaseOption = {
     },
     "toolbox":{
         "show": true,
+        "left": "center",
         "feature": {
+            "restore": {},
             "saveAsImage": {
                 "type": "png"
             }
