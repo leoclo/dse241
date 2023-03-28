@@ -14,7 +14,5 @@ name_0 - country (Brazil)
 name_1 - state  (Minas Gerais)
 name_2 - Belo Horizonte
 
-# For better map efficiency
-natural_earth_state_provinces_light.geojson
-https://maps.princeton.edu/catalog/stanford-gn522sy3319
+
 

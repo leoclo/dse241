@@ -69,6 +69,18 @@ Once it's finished start the application with the following command
 npm run dev
 ```
 
+#### Piles pre-processing
+
+Uncomment what you want to run on the file flask/src/core/piles/piles.py
+
+With the activated enviroment and on path flask/src/core/piles
+
+Run
+
+```bash
+python piles.py
+```
+
 ## Usage
 ---
 
@@ -81,4 +93,6 @@ Navigate to http://localhost:5173/co2 in your browser to see the visualization c
 Navigate to http://localhost:5173/sheep in your browser to see the visualization created for the Sheep Visualization assignment
 
 Navigate to http://localhost:5173/virus in your browser to see the visualization created for the Virus Visualization assignment
+
+Navigate to http://localhost:5173/piles in your browser to see the visualization created for the Virus Visualization assignment
 
