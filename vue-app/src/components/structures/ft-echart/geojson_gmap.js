@@ -180,6 +180,9 @@ export const dfToEchartScatter = (data) => {
     silent: false,
     animation: false,
     data: seriesData,
+    symbolSize: function (val) {
+      return 20;
+    }
 }]
 
 return {

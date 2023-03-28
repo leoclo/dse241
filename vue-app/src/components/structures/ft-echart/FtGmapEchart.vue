@@ -37,7 +37,6 @@
             return {
                 gmap: null,
                 myChart: null,
-                apiKey: 'AIzaSyAlIZXl2MiwZP1mMAEp4q-8cfZ_y1tdNPQ',
                 echartOption: {},
                 echartKey: 0,
                 mode: 'admin1'
